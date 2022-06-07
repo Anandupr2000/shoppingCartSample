@@ -1,0 +1,42 @@
+<section>
+    <h1 class="text-center">Cart</h1>
+    <div class="container">
+        <table class="table">
+            <thead>
+                <tr >
+                    <th>Item</th>
+                    <th>Title</th>
+                    <th>Price</th>
+                    <th>Quantity</th>
+                </tr>
+            </thead>
+            <tbody>
+                {{#each products}}
+                {{!-- each product in products has complete product details --}}
+                {{!-- id for row is given on the basis of product's id ( considering removing)--}}
+                <tr id="row{{this.product._id}}">
+                    {{!-- in HBS direct accessed folder is public( since it generate html file for client side),
+                     so path is relative to public folder --}}
+                    <td><img src="/product_images/{{this.item}}.jpg" style="width:5rem;height:5rem" 
+                        class="card-img-top" alt="..."></td>
+                    <td class="pt-4">{{this.product.Name}}</td>
+                    <td class="pt-4">{{this.product.Price}}</td>
+
+                    <td class="pt-4">
+                        <button class="button mr-3" id="decrementBtn{{this.product._id}}" onclick="changeQuantity('{{this._id}}','{{this.product._id}}','-')">-</button>
+                        <span id="{{this.product._id}}"> {{this.quantity}} </span>
+                        <button class="button ml-3" onclick="changeQuantity('{{this._id}}','{{this.product._id}}','+')">+</-button>
+                    </td>
+                    
+                    <td class="pt-4"><button class="btn btn-danger" onclick="removeCartProduct('{{this._id}}','{{this.product._id}}')">Remove</button></td>
+                </tr>
+                {{/each}}
+            </tbody>
+        </table>
+        <div class="d-grid gap-2 float-end mt-3 me-5">
+        <h3 >Total Price: RS.400000</h3>
+        <a class="btn btn-success mt-3" href="/place-order">Place Order</a>
+        </div>
+    </div>
+</section>
+
